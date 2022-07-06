@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -23,7 +23,6 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true
     }),
     PagesModule,
-    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

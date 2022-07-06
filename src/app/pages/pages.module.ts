@@ -1,13 +1,15 @@
+import { MaterialModule } from './../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdjutancyComponent } from './adjutancy/adjutancy.component';
 
 @NgModule({
   declarations: [
-    AdjutancyComponent
+    AdjutancyComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ]
 })
 
