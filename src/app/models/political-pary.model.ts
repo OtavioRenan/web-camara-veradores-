@@ -1,8 +1,8 @@
 import { BaseModel } from './../core/base.model';
 
-export interface AdjutancyModel extends BaseModel {
+export interface PoliticalParyModel extends BaseModel {
     name: String;
-    description: String;
+    initials: String;
     createdAt: Date;
     updatedAt: Date;
     createdAtBr: String;

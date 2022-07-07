@@ -1,6 +1,6 @@
 import { BaseModel } from './../core/base.model';
 
-export interface AdjutancyModel extends BaseModel {
+export interface CommissionModel extends BaseModel {
     name: String;
     description: String;
     createdAt: Date;

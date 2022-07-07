@@ -1,8 +1,9 @@
 import { BaseModel } from './../core/base.model';
 
-export interface AdjutancyModel extends BaseModel {
-    name: String;
-    description: String;
+export interface DirectorTableModel extends BaseModel {
+    legislatureId: Number;
+    adjutancyId: Number;
+    parliamentaryId: Number;
     createdAt: Date;
     updatedAt: Date;
     createdAtBr: String;
