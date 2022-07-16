@@ -1,13 +1,14 @@
 import { BaseModel } from './../core/base.model';
 
-export interface LegislatureModel extends BaseModel {
-    description: String;
-    dateStart: Date;
-    dateEnd: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    dateStartBr: String;
-    dateEndBr: String;
-    createdAtBr: String;
-    updatedAtBr: String;
+export class LegislatureModel implements BaseModel {
+    id!: number;
+    description!: string;
+    dateStart!: Date;
+    dateEnd!: Date;
+    createdAt!: Date;
+    updatedAt!: Date;
+    dateStartBr!: string;
+    dateEndBr!: string;
+    createdAtBr!: string;
+    updatedAtBr!: string;
 }

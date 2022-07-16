@@ -1,11 +1,12 @@
 import { BaseModel } from './../core/base.model';
 
-export interface DirectorTableModel extends BaseModel {
-    legislatureId: Number;
-    adjutancyId: Number;
-    parliamentaryId: Number;
-    createdAt: Date;
-    updatedAt: Date;
-    createdAtBr: String;
-    updatedAtBr: String;
+export class DirectorTableModel implements BaseModel {
+    id!: number;
+    legislatureId!: number;
+    adjutancyId!: number;
+    parliamentaryId!: number;
+    createdAt!: Date;
+    updatedAt!: Date;
+    createdAtBr!: string;
+    updatedAtBr!: string;
 }

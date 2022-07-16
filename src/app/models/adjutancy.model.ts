@@ -1,10 +1,11 @@
 import { BaseModel } from './../core/base.model';
 
-export interface AdjutancyModel extends BaseModel {
-    name: String;
-    description: String;
-    createdAt: Date;
-    updatedAt: Date;
-    createdAtBr: String;
-    updatedAtBr: String;
+export class AdjutancyModel implements BaseModel {
+    id!: number;
+    name!: string;
+    description!: string;
+    createdAt!: Date;
+    updatedAt!: Date;
+    createdAtBr!: string;
+    updatedAtBr!: string;
 }

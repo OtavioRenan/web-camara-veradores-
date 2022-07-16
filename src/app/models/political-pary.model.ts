@@ -1,10 +1,11 @@
 import { BaseModel } from './../core/base.model';
 
-export interface PoliticalParyModel extends BaseModel {
-    name: String;
-    initials: String;
-    createdAt: Date;
-    updatedAt: Date;
-    createdAtBr: String;
-    updatedAtBr: String;
+export class PoliticalParyModel implements BaseModel {
+    id!: number;
+    name!: string;
+    initials!: string;
+    createdAt!: Date;
+    updatedAt!: Date;
+    createdAtBr!: string;
+    updatedAtBr!: string;
 }
