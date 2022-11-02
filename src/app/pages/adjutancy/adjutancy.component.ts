@@ -1,9 +1,7 @@
-import { Params } from '@angular/router';
+import { SpringPagination } from '../../models/spring-pagination.model';
 import { HttpParams } from '@angular/common/http';
 import { AdjutancyService } from './../../services/adjutancy/adjutancy.service';
-import { AdjutancyModel } from './../../models/adjutancy.model';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-adjutancy',
   templateUrl: './adjutancy.component.html',
@@ -11,39 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AdjutancyComponent implements OnInit {
-
-  protected params: Object = { name: '', description: '', createdAt: '', updatedAt: '' };
+  
+  protected tableDisplayedColumns: Array<string> = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'actions'];
+  
+  protected pagination: SpringPagination = new SpringPagination();
+  
+  protected offSet: number = 0;
+  
+  protected pageSize: number = 5;
  
-  protected tableDisplayedColumns: Array<string> = ['id', 'name', 'description', 'createdAt', 'updatedAt'];
-
-  protected listAdjutancy: Array<AdjutancyModel> = [
-    { id: 1, name: 'Presidente', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' },
-    { id: 2, name: 'Membro', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' },
-    { id: 3, name: 'Relator', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' },
-    { id: 4, name: '1º Suplente', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' },
-    { id: 5, name: '2º Suplente', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' },
-    { id: 6, name: '3º Suplente', description: '1.0079', createdAt: this.newDate(), updatedAt: this.newDate(), createdAtBr: '', updatedAtBr: '' }
-  ];
+  protected params: Object = { name: '', description: '', createdAt: '', updatedAt: '' };
 
   constructor(private service: AdjutancyService) {}
 
-  ngOnInit(): void {
-    this.findAll()
+  ngOnInit() : void {
+    this.getPagination(this.offSet, this.pageSize, this.getParamsUrl());
   }
 
-  async findAll() : Promise<void> {
-    let params = this.getParamsUrl();
+  async getPagination(offSet: number, pageSize: number, params: HttpParams) : Promise<void> {
 
-    this.service.findAll(params).subscribe(
+    this.service.pagination(offSet, pageSize, params).subscribe(
       { 
-        next: res => this.listAdjutancy = res,
+        next: res => { this.pagination = res; console.log(res) },
         error: err => console.log(err),
-        complete: () => console.info('Complete.')
+        complete: () => console.info('Complete ===> Get Pagination')
       }
     );
   }
-
-  private newDate() : Date { return new Date('2022-07-6'); }
 
   private getParamsUrl() : HttpParams {
     let params = new HttpParams();

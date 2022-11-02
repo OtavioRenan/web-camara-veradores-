@@ -1,3 +1,4 @@
+import { SpringPagination } from '../models/spring-pagination.model';
 import { environment } from './../../environments/environment';
 import { BaseModel } from "./base.model";
 import { HttpOptionsJsonUtil } from './../utils/httpOptionsJsonUtil';
@@ -17,6 +18,12 @@ export abstract class BaseService<Model extends BaseModel> {
 
     constructor(private httpClient: HttpClient, private service: String) {
         this.urlService = service;
+    }
+
+    public pagination(offSet: number, pageSize: number, params: HttpParams) : Observable<SpringPagination> {
+        return this.httpClient.get<SpringPagination>(
+            `${this.makeUrl()}pagination/${offSet}/${pageSize}?${params}`
+        );
     }
 
     public findAll(params: HttpParams) : Observable<Array<Model>> {
