@@ -1,12 +1,15 @@
 <p>Adjutancy</p>
 <div layout="row">
   <div class="mat-elevation-z8">
-    <form class="form-search">  
+    <form class="form-search" [formGroup]="formGroupSearch">
       <mat-form-field class="w-100" appearance="fill">
         <mat-label>Barra de pesquisa</mat-label>
-        <input matInput type="text" placeholder="Pesquisar">
-        <a matSuffix aria-label="Search">
+        <input matInput type="text" placeholder="Pesquisar" formControlName="fields">
+        <a (click)="onCLickSearch()" matSuffix aria-label="Search">
           <mat-icon aria-hidden="false" aria-label="Search" color="primary">search</mat-icon>
+        </a>
+        <a (click)="onCLickClearSearch()" *ngIf=" formGroupSearch.controls['fields'].value?.length != 0 " matSuffix aria-label="Close">
+          <mat-icon aria-hidden="false" aria-label="Close" color="warn">close</mat-icon>
         </a>
       </mat-form-field>
     </form>
