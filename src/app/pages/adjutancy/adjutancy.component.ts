@@ -1,7 +1,9 @@
-import { SpringPagination } from '../../models/spring-pagination.model';
+import { SpringPagination } from './../../models/spring-pagination.model';
 import { HttpParams } from '@angular/common/http';
 import { AdjutancyService } from './../../services/adjutancy/adjutancy.service';
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-adjutancy',
   templateUrl: './adjutancy.component.html',
@@ -9,32 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AdjutancyComponent implements OnInit {
+
+  protected pageSizeOptions: Array<number> = [5, 10, 20, 50];
   
-  protected tableDisplayedColumns: Array<string> = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'actions'];
+  protected tableDisplayedColumns: Array<string> = ['id', 'name', 'description', 'actions'];
   
   protected pagination: SpringPagination = new SpringPagination();
-  
-  protected offSet: number = 0;
-  
-  protected pageSize: number = 5;
+
+  protected pageEvent: PageEvent = {
+    pageIndex: 0,
+    previousPageIndex: 0,
+    pageSize: 5,
+    length: 0
+  }
  
   protected params: Object = { name: '', description: '', createdAt: '', updatedAt: '' };
 
   constructor(private service: AdjutancyService) {}
 
   ngOnInit() : void {
-    this.getPagination(this.offSet, this.pageSize, this.getParamsUrl());
+    this.getPagination(this.pageEvent);
   }
 
-  async getPagination(offSet: number, pageSize: number, params: HttpParams) : Promise<void> {
-
-    this.service.pagination(offSet, pageSize, params).subscribe(
+  async getPagination(event: PageEvent) : Promise<void> {
+    this.service.paginationWithParams(event.pageIndex, event.pageSize, this.getParamsUrl()).subscribe(
       { 
-        next: res => { this.pagination = res; console.log(res) },
-        error: err => console.log(err),
-        complete: () => console.info('Complete ===> Get Pagination')
+        next: res => {
+          this.pagination = res
+          this.setPageEvent(res);
+        },
+        error: err => console.log(err)
       }
     );
+  }
+
+  private setPageEvent(pagination: SpringPagination) : void {
+    this.pageEvent.length = pagination.totalElements;
+    this.pageEvent.pageSize = pagination.size;
   }
 
   private getParamsUrl() : HttpParams {

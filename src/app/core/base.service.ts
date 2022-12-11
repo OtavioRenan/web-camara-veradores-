@@ -20,9 +20,15 @@ export abstract class BaseService<Model extends BaseModel> {
         this.urlService = service;
     }
 
-    public pagination(offSet: number, pageSize: number, params: HttpParams) : Observable<SpringPagination> {
+    public paginationWithParams(offSet: number, pageSize: number, params: HttpParams) : Observable<SpringPagination> {
         return this.httpClient.get<SpringPagination>(
             `${this.makeUrl()}pagination/${offSet}/${pageSize}?${params}`
+        );
+    }
+
+    public pagination(offSet: number, pageSize: number) : Observable<SpringPagination> {
+        return this.httpClient.get<SpringPagination>(
+            `${this.makeUrl()}pagination/${offSet}/${pageSize}`
         );
     }
 

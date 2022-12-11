@@ -2,18 +2,7 @@ import { BaseModel } from '../core/base.model';
 
 export class SpringPagination {
     content!: Array<BaseModel>;
-    pageable!: {
-        sort: {
-            sorted: boolean,
-            unsorted: boolean,
-            empty: boolean,
-        },
-        pageSize: number,
-        pageNumber: number,
-        offset: number,
-        unpaged: boolean,
-        paged: boolean
-    };
+    pageable!: Object;
     last!: boolean
     totalElements!: number;
     totalPages!: number;
